@@ -1,4 +1,4 @@
-import pool from "../../db/connections"; // conexion a Postgres
+import pool from "../../../db/connections"; // conexion a Postgres
 import { Book } from "../entity/book";       // entity
 
 export class BookRepository {
@@ -18,7 +18,7 @@ export class BookRepository {
 
 
     async createBook(title: string, author: string, genre: string, synopsis: string, publishedYear: number): Promise<Book> {
-        // promise que si se resuleve va a ser un objeto book
+        // promise que si se resuelve va a ser un objeto book
         const result = await pool.query(
             `INSERT INTO book (title, author, genre, synopsis, publishedYear) 
      VALUES ($1, $2, $3, $4, $5)
@@ -27,7 +27,7 @@ export class BookRepository {
         );
         // columnas en la que meto valores,
         // VALUES = los valores que meto
-        // RETURNING * =  el libro que acabo de crear, el asterisco serian todas las col
+        // RETURNING * = el libro que acabo de crear, el asterisco serian todas las col
         return result.rows[0];
     }
 

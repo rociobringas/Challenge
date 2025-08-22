@@ -5,9 +5,13 @@ services:
     container_name: challenge_db
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: postgres # poner esto en un .env y un gitignore
       POSTGRES_DB: challenge_db
     ports:
-      - "5432:5432"
+      - "5001:5432"
     volumes:
-      - ./backend/src/db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - challenge_db:/var/lib/postgresql/data
+
+
+volumes:
+  challenge_db:
