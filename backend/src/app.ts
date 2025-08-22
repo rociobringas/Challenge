@@ -9,6 +9,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/ping", (_req, res) => res.json({ message: "pong" }));
+
 app.use("/books", bookRoutes);
 app.use("/library", libraryRoutes);
 
