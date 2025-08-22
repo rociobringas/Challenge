@@ -1,6 +1,6 @@
 // src/modules/library/service/libraryService.ts
 import { Book } from "@prisma/client";
-import { BadRequestError, NotFoundError } from "../../Errors";
+import { BadRequestError, NotFoundError } from "../../../errors";
 import { LibraryRepository } from "../repository/libraryRepository";
 
 export class LibraryService {

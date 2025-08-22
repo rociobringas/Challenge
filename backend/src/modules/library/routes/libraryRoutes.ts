@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {LibraryController} from "../modules/library/controller/libraryController";
+import {LibraryController} from "../controller/libraryController";
 
 const router = Router();
 const controller = new LibraryController();

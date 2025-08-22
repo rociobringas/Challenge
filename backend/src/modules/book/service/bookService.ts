@@ -1,6 +1,6 @@
 import {BookRepository} from "../repository/bookRepository";
 import {Book} from "@prisma/client";
-import {BadRequestError, NotFoundError} from "../../Errors";
+import {BadRequestError, NotFoundError} from "../../../errors";
 
 
 export class BookService {

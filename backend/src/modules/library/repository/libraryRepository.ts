@@ -1,6 +1,6 @@
 import { PrismaClient, Library, Book } from '@prisma/client'
 import {BookRepository} from "../../book/repository/bookRepository";
-import {BadRequestError} from "../../Errors";
+import {BadRequestError} from "../../../errors";
 
 const prisma = new PrismaClient()
 const bookRepo = new BookRepository()
