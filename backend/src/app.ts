@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.get("/ping", (_req, res) => res.json({ message: "pong" }));
 
-app.use("/books", bookRoutes);
-app.use("/library", libraryRoutes);
+app.use("/books", bookRoutes); // cuando llegue una request a /books, la maneja bookRoutes
+app.use("/library", libraryRoutes); // es lo que en flask era bp
 
 export default app;

@@ -1,0 +1,174 @@
+.book-card {
+    /* Contenedor principal con aspecto de tarjeta de libro */
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    box-shadow:
+            0 4px 12px rgba(0, 0, 0, 0.1),
+            0 2px 4px rgba(0, 0, 0, 0.06);
+    padding: 20px;
+    margin: 16px;
+    width: 280px;
+    min-height: 320px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(230, 234, 239, 0.8);
+}
+
+.book-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+            0 8px 25px rgba(0, 0, 0, 0.15),
+            0 4px 8px rgba(0, 0, 0, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.book-card::before {
+    /* Efecto decorativo superior */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ef4444, #f59e0b);
+    border-radius: 12px 12px 0 0;
+}
+
+.book-card h2 {
+    /* Título del libro */
+    color: #1f2937;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 8px 0 16px 0;
+    line-height: 1.4;
+    min-height: 56px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.book-card p {
+    color: #6b7280;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 8px 0;
+}
+
+.book-card p strong {
+    color: #374151;
+    font-weight: 600;
+}
+
+.book-card p:first-of-type {
+    /* Autor */
+    color: #4f46e5;
+    font-weight: 500;
+}
+
+.book-card p:nth-of-type(2) {
+    /* Género */
+    background: rgba(59, 130, 246, 0.1);
+    color: #1e40af;
+    padding: 4px 8px;
+    border-radius: 16px;
+    display: inline-block;
+    font-size: 0.8rem;
+    margin: 8px 0 12px 0;
+}
+
+.book-card p:nth-last-of-type(2) {
+    /* Sinopsis */
+    color: #4b5563;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin: 12px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 60px;
+}
+
+.book-card p:last-of-type {
+    /* Año de publicación */
+    color: #9ca3af;
+    font-size: 0.85rem;
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid rgba(229, 231, 235, 0.8);
+}
+
+/* Variaciones de colores para diferentes géneros */
+.book-card[data-genre="Fiction"] {
+    border-left: 4px solid #ef4444;
+}
+
+.book-card[data-genre="Science Fiction"] {
+    border-left: 4px solid #3b82f6;
+}
+
+.book-card[data-genre="Mystery"] {
+    border-left: 4px solid #8b5cf6;
+}
+
+.book-card[data-genre="Romance"] {
+    border-left: 4px solid #ec4899;
+}
+
+.book-card[data-genre="Fantasy"] {
+    border-left: 4px solid #10b981;
+}
+
+.book-card[data-genre="Non-fiction"] {
+    border-left: 4px solid #f59e0b;
+}
+
+/* Contenedor para múltiples tarjetas */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 24px;
+    background-color: #f9fafb;
+    min-height: 100vh;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .book-card {
+        width: 100%;
+        margin: 8px;
+        padding: 16px;
+        min-height: 280px;
+    }
+
+    .books-grid {
+        grid-template-columns: 1fr;
+        padding: 16px;
+        gap: 16px;
+    }
+
+    .book-card h2 {
+        font-size: 1.2rem;
+        min-height: 48px;
+    }
+}
+
+/* Animación de carga */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.book-card {
+    animation: fadeInUp 0.6s ease-out;
+}
