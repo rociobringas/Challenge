@@ -1,5 +1,5 @@
 import "./features/books/ui/bookCard/bookCard.css";
-import type {BookCardProps} from "../../types/bookType.ts";
+import type {BookCardProps} from "../../types/bookCardType.ts";
 import "./bookCard.css"
 
 export function BookCard({ title, author, genre, synopsis, yearPublished }: BookCardProps) {

@@ -1,0 +1,27 @@
+import type { Book } from "../types/bookType";
+
+const API_URL = import.meta.env.VITE_API_URL as string;
+
+async function apiFetch<T>(input: RequestInfo, init?: RequestInit): Promise<T> {
+    const res = await fetch(input, { headers: { "Content-Type": "application/json" }, ...init });
+    if (!res.ok) {
+        const text = await res.text().catch(() => "");
+        throw new Error(text || `Request failed with status ${res.status}`);
+    }
+    return res.json() as Promise<T>;
+}
+
+export async function getLibrary(): Promise<Book[]> {
+    return apiFetch<Book[]>(`${API_URL}/library`);
+}
+
+export async function addBookToLibrary(bookId: number): Promise<Book> {
+    return apiFetch<Book>(`${API_URL}/library`, {
+        method: "POST",
+        body: JSON.stringify({ bookId }),
+    });
+}
+
+export async function removeFromLibrary(bookId: number): Promise<Book> {
+    return apiFetch<Book>(`${API_URL}/library/${bookId}`, { method: "DELETE" });
+}
