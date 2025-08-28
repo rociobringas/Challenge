@@ -33,17 +33,19 @@ export class BookRepository {
     }
 
 
-    async createBook(data: Omit<Book, "id">): Promise<Book> {
-        try {
-            return await prisma.book.create({ data });
-        } catch (e) {
-            if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2002") {
-                const err: any = new Error("Book already exists (same title & author)");
-                err.status = 409;
-                throw err;
-            }
-            throw e;
+    async createBook(data: Omit<Book,"id">): Promise<Book> {
+        const exists = await prisma.book.findFirst({
+            where: {
+                title:  { equals: data.title.trim(),  mode: "insensitive" },
+                author: { equals: data.author.trim(), mode: "insensitive" },
+            },
+        });
+        if (exists) {
+            const err: any = new Error("Book already exists (same title & author)");
+            err.status = 409;
+            throw err;
         }
+        return prisma.book.create({ data: { ...data, title: data.title.trim(), author: data.author.trim() } });
     }
 
     async deleteBook(id: number): Promise<Book> {
