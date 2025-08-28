@@ -20,11 +20,14 @@ export function BookForm({ onSubmit }: BookFormProps) {
         const { name, value } = e.target;
         setForm((prev) => ({
             ...prev,
+            // va actualizando cuando voy tipeando el form
             [name]: name === "yearPublished" ? Number(value) : value
+            // si es year lo convierto a num, sino lo dejo como string
         }));
     }
 
     function handleSubmit(e: FormEvent) {
+        // se ejecuta cuanto toco send
         e.preventDefault();
         onSubmit(form);
     }

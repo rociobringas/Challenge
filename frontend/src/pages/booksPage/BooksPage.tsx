@@ -11,7 +11,7 @@ import { Notification } from "../../components/notification/Notification";
 export default function BooksPage() {
     const [books, setBooks] = useState<(Book & { inLibrary?: boolean })[]>([]);
     const [loading, setLoading] = useState(true);
-    const [q, setQ] = useState("");
+    const [q, setQ] = useState(""); // aca guardo la palabra que pongo en search bar
     const navigate = useNavigate();
     const [notification, setNotification] = useState<string | null>(null);
 
@@ -21,13 +21,17 @@ export default function BooksPage() {
         try {
             const [allBooks, myLibrary] = await Promise.all([
                 q ? bookApi.getBooks({ search: q }) : bookApi.getBooks(),
-                libraryApi.getLibraryBooks()
+                // traigo todos los libros, si q esta vacio traigo todos,
+                // y si tiene algo, solo traigo los que cumplan con q en la search bar
+                libraryApi.getLibraryBooks() // agarro estos tmb para poder sacar el boton de add
             ]);
 
             const idsInLibrary = new Set(myLibrary.map(b => b.id));
+            // hago set para busqueda mas rapida
             const merged = allBooks.map(b => ({ ...b, inLibrary: idsInLibrary.has(b.id) }));
+            // agrego in library flag
 
-            setBooks(merged);
+            setBooks(merged); // actualizo estado
         } finally {
             setLoading(false);
         }
@@ -60,9 +64,11 @@ export default function BooksPage() {
                 <h2 className="books-title">Books</h2>
                 <SearchBar onSearch={setQ} initial={q} />
                 <BookGrid
-                    books={books}
+                    books={books} // estos son los que agarre en el load
                     onSelect={(b) => navigate(`/books/${b.id}`)}
+                    // si cliqueo me voy a book detail page de ese id
                     onActionFor={(b) =>
+                        // si tiene promise, y muestra el boton
                         !b.inLibrary
                             ? { label: "Add to my library", onClick: handleAddToLibrary }
                             : undefined

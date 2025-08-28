@@ -19,6 +19,7 @@ export default function LibraryPage() {
     async function handleRemove(book: Book) {
         await libraryApi.removeFromLibrary(book.id);
         setBooks(prev => prev.filter(b => b.id !== book.id));
+        // aca vuelvo a cargar los books, diciendo que queden todos los lubros que no cumplan con id != id que quiero borrar
     }
 
     if (loading) return <div className="library-loading">Loading books...</div>;

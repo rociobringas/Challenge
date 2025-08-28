@@ -8,14 +8,13 @@ import { Notification } from "../../components/notification/Notification";
 
 export default function CreateBookPage() {
     const navigate = useNavigate();
-    const [notification, setNotification] = useState<string | null>(null);
+    const [notification, setNotification] = useState<string | null>(null); // guardo para avisar si se creo bien o no
     const timerRef = useRef<number | null>(null);
 
     useEffect(() => {
         if (!notification) return;
-        // auto-hide del toast
         const t = window.setTimeout(() => setNotification(null), 3000);
-        return () => clearTimeout(t);
+        return () => clearTimeout(t); // con esto borro la noti osea q se vaya
     }, [notification]);
 
     useEffect(() => {
@@ -26,7 +25,7 @@ export default function CreateBookPage() {
 
     async function handleSubmit(data: BookCardProps) {
         try {
-            await bookApi.createBook(data);
+            await bookApi.createBook(data);// si la promise sale bien mando not de sucess
             setNotification("Book created successfully");
             timerRef.current = window.setTimeout(() => navigate("/books"), 700);
         } catch (e) {

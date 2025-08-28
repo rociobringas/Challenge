@@ -6,8 +6,8 @@ import { BookCard } from "../../components/bookCard/BookCard";
 import "./BookDetailPage.css";
 
 export default function BookDetailPage() {
-    const { id } = useParams<{ id: string }>();
-    const [book, setBook] = useState<Book | null>(null);
+    const { id } = useParams<{ id: string }>(); // fun de react que me agara el url, aca directo lo corto y me queda el id
+    const [book, setBook] = useState<Book | null>(null); // guardo el libro que quiero ver en detail
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
@@ -16,7 +16,7 @@ export default function BookDetailPage() {
             if (!id) return;
             setLoading(true);
             try {
-                const data = await bookApi.getBookById(Number(id));
+                const data = await bookApi.getBookById(Number(id)); // hago la busqueda por id
                 setBook(data);
             } finally {
                 setLoading(false);
