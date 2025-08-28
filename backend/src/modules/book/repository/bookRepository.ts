@@ -11,16 +11,14 @@ export class BookRepository {
 
         if (search) {
             where.OR = [
-                { title: { contains: search, mode: "insensitive" } },
-                { author: { contains: search, mode: "insensitive" } },
+                { title:  { startsWith: search, mode: "insensitive" } },
+                { author: { startsWith: search, mode: "insensitive" } },
+                { genre:  { startsWith: search, mode: "insensitive" } },
             ];
         }
-        if (genre) {
-            where.genre = { equals: genre, mode: "insensitive" };
-        }
-        if (author) {
-            where.author = { contains: author, mode: "insensitive" };
-        }
+
+        if (genre) where.genre =  { startsWith: genre, mode: "insensitive" };
+        if (author) where.author = { startsWith: author, mode: "insensitive" };
 
         return prisma.book.findMany({
             where,

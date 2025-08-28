@@ -1,4 +1,3 @@
-// src/components/bookGrid/BookGrid.tsx
 import type { Book } from "../../types/BookType";
 import { BookCard } from "../bookCard/BookCard";
 import "./BookGrid.css";

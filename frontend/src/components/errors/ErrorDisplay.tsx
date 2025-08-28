@@ -1,4 +1,3 @@
-
 import type { ErrorDisplayProps } from "../../types/ErrorType";
 import "./ErrorDisplay.css";
 

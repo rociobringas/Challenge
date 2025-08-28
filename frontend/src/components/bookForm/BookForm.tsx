@@ -3,7 +3,6 @@ import type {BookCardProps} from "../../types/BookCardType.ts";
 import './BookForm.css'
 
 
-
 type BookFormProps = {
     onSubmit: (data: BookCardProps) => void;
 };
