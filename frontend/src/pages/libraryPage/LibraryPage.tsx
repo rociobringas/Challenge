@@ -38,8 +38,11 @@ export default function LibraryPage() {
                 <div className="library-grid">
                     <BookGrid
                         books={books}
-                        onSelect={(b) => navigate(`/books/${b.id}`)}
-                        onAction={{ label: "Quitar", onClick: handleRemove }}
+                        onSelect={(b) => navigate(`/books/${b.id}`)}  // ver detalle si querés
+                        onActionFor={() => ({
+                            label: "Quitar",
+                            onClick: handleRemove,
+                        })}
                     />
                 </div>
             )}
