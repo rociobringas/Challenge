@@ -5,6 +5,7 @@ import * as libraryApi from "../../services/Library";
 import type { Book } from "../../types/BookType";
 import { SearchBar } from "../../components/searchBar/SearchBar";
 import { BookGrid } from "../../components/bookGrid/BookGrid";
+import {ErrorDisplay} from "../../components/errors/ErrorDisplay.tsx";
 
 
 export default function BooksPage() {
@@ -12,6 +13,7 @@ export default function BooksPage() {
     const [loading, setLoading] = useState(true);
     const [q, setQ] = useState("");
     const navigate = useNavigate();
+    const [notification, setNotification] = useState<string | null>(null);
 
     async function load() {
         setLoading(true);
@@ -33,11 +35,21 @@ export default function BooksPage() {
     useEffect(() => { load(); /* eslint-disable-next-line */ }, [q]);
 
     async function handleAddToLibrary(book: Book) {
-        await libraryApi.addBookToLibrary(book.id);
-        // update state: marcar ese libro como en biblioteca
-        setBooks(prev => prev.map(b => b.id === book.id ? { ...b, inLibrary: true } : b));
-        alert(`Añadido a tu biblioteca: ${book.title}`);
+        try {
+            await libraryApi.addBookToLibrary(book.id);
+            setNotification(`Añadido a tu biblioteca: ${book.title}`);
+        } catch (e) {
+            setNotification(`Error: ${(e as Error).message}`);
+        }
+        await load();
     }
+
+    useEffect(() => {
+        if (notification) {
+            const t = setTimeout(() => setNotification(null), 3000);
+            return () => clearTimeout(t);
+        }
+    }, [notification]);
 
     if (loading) return <p style={{ padding: 24 }}>Cargando libros…</p>;
 
@@ -55,6 +67,7 @@ export default function BooksPage() {
                 }
             />
             {books.length === 0 && <p>No hay resultados.</p>}
+            {notification && <ErrorDisplay message={notification} />}
         </main>
     );
 }

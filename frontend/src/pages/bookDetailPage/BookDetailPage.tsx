@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import * as bookApi from "../../services/Books";
-import * as libraryApi from "../../services/Library";
 import type { Book } from "../../types/BookType";
 import "./BookDetailPage.css";
 
@@ -24,11 +23,6 @@ export default function BookDetailPage() {
         })();
     }, [id]);
 
-    async function handleAdd() {
-        if (!book) return;
-        await libraryApi.addBookToLibrary(book.id);
-        alert("Añadido a tu biblioteca");
-    }
 
     if (loading) return <div className="detail-loading">Cargando…</div>;
     if (!book) return <div className="detail-not-found">Libro no encontrado.</div>;
@@ -86,9 +80,6 @@ export default function BookDetailPage() {
                     )}
 
                     <div className="detail-actions">
-                        <button className="btn-primary" onClick={handleAdd}>
-                            Agregar a mi biblioteca
-                        </button>
                         <button className="btn-ghost" onClick={() => navigate("/books")}>
                             Ver todos
                         </button>
