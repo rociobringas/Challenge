@@ -1,4 +1,4 @@
-import { PrismaClient, Book } from '@prisma/client'
+import { PrismaClient, Book, Prisma } from '@prisma/client'
 import type { BookFilters } from '../service/bookService'
 
 const prisma = new PrismaClient()
@@ -32,10 +32,18 @@ export class BookRepository {
         })
     }
 
-    async createBook(data: Omit<Book, 'id'>): Promise<Book> {
-        return prisma.book.create({
-            data,
-        })
+
+    async createBook(data: Omit<Book, "id">): Promise<Book> {
+        try {
+            return await prisma.book.create({ data });
+        } catch (e) {
+            if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2002") {
+                const err: any = new Error("Book already exists (same title & author)");
+                err.status = 409;
+                throw err;
+            }
+            throw e;
+        }
     }
 
     async deleteBook(id: number): Promise<Book> {

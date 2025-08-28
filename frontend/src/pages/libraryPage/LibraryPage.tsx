@@ -25,9 +25,6 @@ export default function LibraryPage() {
 
     return (
         <main className="library-main">
-            <header className="library-header">
-                <span className="library-count">{books.length}</span>
-            </header>
 
             {books.length === 0 ? (
                 <div className="library-empty">

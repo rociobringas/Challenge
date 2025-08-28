@@ -38,6 +38,7 @@ export class BookController {
         }
     }
 
+
     async delete(req: Request, res: Response, next: NextFunction) {
         try {
             const id = Number(req.params.id);
