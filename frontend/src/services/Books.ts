@@ -1,5 +1,5 @@
-import type { Book } from "../types/bookType.ts";
-import type {BookCardProps} from "../types/bookCardType.ts";             // ajustá si tu tipo vive en otra ruta
+import type { Book } from "../types/BookType.ts";
+import type {BookCardProps} from "../types/BookCardType.ts";
 
 
 const API_URL = import.meta.env.VITE_API_URL as string;
@@ -32,7 +32,7 @@ export async function getBooks(opts?: {
     return apiFetch<Book[]>(`${API_URL}/books${query}`);
 }
 
-export async function getBook(id: number): Promise<Book> {
+export async function getBookById(id: number): Promise<Book> {
     return apiFetch<Book>(`${API_URL}/books/${id}`);
 }
 

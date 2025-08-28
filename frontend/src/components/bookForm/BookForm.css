@@ -1,0 +1,7 @@
+.form { display:grid; gap:12px; }
+.form__row { display:grid; gap:6px; }
+.form__label { font-size:12px; color:#6b7280; font-weight:700; text-transform:uppercase; }
+.form__input,.form__textarea,.form__select { border:1px solid #e5e7eb; border-radius:8px; padding:10px 12px; font-size:14px; }
+.form__actions { display:flex; gap:8px; justify-content:flex-end; }
+.btn { border:1px solid #e5e7eb; background:#fff; color:#111; padding:10px 14px; border-radius:8px; font-weight:700; cursor:pointer; }
+.btn--primary { background:#111; color:#fff; border-color:#111; }

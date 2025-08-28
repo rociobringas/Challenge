@@ -1,0 +1,3 @@
+.searchbar { display:flex; gap:8px; }
+.searchbar__input { flex:1; border:1px solid #e5e7eb; border-radius:8px; padding:10px 12px; font-size:14px; }
+.searchbar__button { border:1px solid #e5e7eb; background:#111; color:#fff; padding:10px 14px; border-radius:8px; font-weight:700; cursor:pointer; }

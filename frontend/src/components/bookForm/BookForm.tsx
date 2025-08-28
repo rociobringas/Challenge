@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
-import type {BookCardProps} from "../../types/bookCardType.ts";
+import type {BookCardProps} from "../../types/BookCardType.ts";
+import './BookForm.css'
 
 
 

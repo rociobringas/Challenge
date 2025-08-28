@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
-import type {SearchBarProps} from "../../types/searchType.ts";
-import "./searchBar.css";
+import type {SearchBarProps} from "../../types/SearchType.ts";
+import "./SearchBar.css";
 
 
 export function SearchBar({ onSearch, initialValue = "", placeholder = "Search..." }: SearchBarProps) {

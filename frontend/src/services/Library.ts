@@ -1,4 +1,4 @@
-import type { Book } from "../types/bookType";
+import type { Book } from "../types/BookType.ts";
 
 const API_URL = import.meta.env.VITE_API_URL as string;
 
@@ -11,7 +11,7 @@ async function apiFetch<T>(input: RequestInfo, init?: RequestInit): Promise<T> {
     return res.json() as Promise<T>;
 }
 
-export async function getLibrary(): Promise<Book[]> {
+export async function getLibraryBooks(): Promise<Book[]> {
     return apiFetch<Book[]>(`${API_URL}/library`);
 }
 

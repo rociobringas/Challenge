@@ -1,5 +1,5 @@
-import "./ErrorDisplay.css";
-import type { ErrorDisplayProps } from "../../types/errorType.ts";
+
+import type { ErrorDisplayProps } from "../../types/ErrorType.ts";
 
 export function ErrorDisplay({ message }: ErrorDisplayProps) {
     return (

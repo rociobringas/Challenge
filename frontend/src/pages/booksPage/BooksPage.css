@@ -1,0 +1,40 @@
+.books-main{
+    max-width: 1280px;
+    margin: 32px auto;
+    padding: 0 24px;
+}
+
+.books-header{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.books-title{
+    margin: 0;
+    font-size: 28px;
+    font-weight: 800;
+    color: #111;
+}
+
+.books-count{
+    color: #666;
+    font-size: 14px;
+}
+
+.books-search{ margin-bottom: 16px; }
+
+/* Contenedor donde montás el BookGrid */
+.books-grid{}
+
+/* Estados */
+.books-loading,
+.books-empty{
+    padding: 48px 0;
+    text-align: center;
+    color: #666;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-top: 24px;
+}

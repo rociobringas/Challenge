@@ -1,0 +1,37 @@
+.library-main{
+    max-width: 1280px;
+    margin: 32px auto;
+    padding: 0 24px;
+}
+
+.library-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+}
+
+.library-title{
+    margin: 0;
+    font-size: 28px;
+    font-weight: 900;
+    color: #111;
+}
+
+.library-count{
+    color: #666;
+    font-size: 14px;
+}
+
+.library-grid{}
+
+/* Estados */
+.library-loading,
+.library-empty{
+    padding: 48px 0;
+    text-align: center;
+    color: #666;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-top: 24px;
+}

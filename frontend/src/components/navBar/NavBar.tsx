@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import "./navBar.css";
+import "./NavBar.css";
 
-export function Navbar() {
+export function NavBar() {
     return (
         <nav className="navbar">
             <h1 className="logo">My Library</h1>
