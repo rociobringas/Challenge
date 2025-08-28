@@ -1,37 +1,6 @@
-.library-main{
-    max-width: 1280px;
-    margin: 32px auto;
-    padding: 0 24px;
-}
-
-.library-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 16px;
-}
-
-.library-title{
-    margin: 0;
-    font-size: 28px;
-    font-weight: 900;
-    color: #111;
-}
-
-.library-count{
-    color: #666;
-    font-size: 14px;
-}
-
-.library-grid{}
-
-/* Estados */
-.library-loading,
+.library-main{ max-width: var(--container); margin: 40px auto; padding: 0 24px; }
+.library-title{ margin: 0 0 12px; font-size: 32px; font-weight: 900; letter-spacing: -.02em; }
 .library-empty{
-    padding: 48px 0;
-    text-align: center;
-    color: #666;
-    border: 1px solid #eee;
-    border-radius: 8px;
-    margin-top: 24px;
+    margin: 24px 0; color: var(--muted); font-weight: 700;
+    border: 1px dashed var(--border); border-radius: 12px; padding: 22px; background: #fff;
 }

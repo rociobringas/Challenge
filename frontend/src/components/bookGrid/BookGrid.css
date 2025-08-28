@@ -1,5 +1,54 @@
-.book-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(190px,1fr)); gap:16px; }
-.book-grid__item { display:grid; grid-template-rows:1fr auto; }
-.book-grid__body { background:transparent; border:0; padding:0; text-align:inherit; cursor:pointer; }
-.book-grid__action { border:1px solid #e5e7eb; background:#fff; color:#111827; border-radius:10px; padding:8px 10px; font-weight:700; cursor:pointer; margin-top:8px; }
-.book-grid__empty { border:1px solid #eee; border-radius:10px; padding:32px; text-align:center; color:#666; }
+/* src/components/bookGrid/BookGrid.css */
+
+.book-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+}
+
+/* Cada item usa flex para que el body crezca y el footer quede fijo abajo */
+.book-grid__item{
+    display: flex;
+    flex-direction: column;
+    min-height: 180px;            /* opcional: asegura altura mínima parecida */
+}
+
+/* El body ocupa todo el espacio disponible */
+.book-grid__body{
+    border: 0;
+    padding: 0;
+    background: transparent;
+    text-align: initial;
+    cursor: pointer;
+    flex: 1;                      /* <- clave: estira la card */
+}
+
+/* Footer SIEMPRE está, con altura fija */
+.book-grid__footer{
+    margin-top: 10px;
+    height: 44px;                 /* <- reservar espacio uniforme */
+    display: flex;
+    align-items: stretch;
+}
+
+/* Botón de acción */
+.book-grid__action{
+    width: 100%;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--text);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background .12s ease, border-color .12s ease, transform .06s ease;
+}
+.book-grid__action:hover{ background: #fafafa; border-color: #dfe3e9; }
+.book-grid__action:active{ transform: translateY(1px); }
+
+/* Spacer invisible para cuando no hay acción (mantiene la altura del footer) */
+.book-grid__spacer{
+    flex: 1;
+    border-radius: 10px;
+    background: transparent;
+}

@@ -4,7 +4,7 @@ import "./NavBar.css";
 export function NavBar() {
     return (
         <nav className="navbar">
-            <h1 className="logo">My Library</h1>
+            <h1 className="logo">iBook</h1>
             <ul className="links">
                 <li>
                     <Link to="/books">Books</Link>

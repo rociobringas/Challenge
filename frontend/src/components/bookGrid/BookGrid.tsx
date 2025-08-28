@@ -12,6 +12,7 @@ type BookGridProps = {
     ) => { label: string; onClick: (book: BookWithFlag) => void | Promise<void> } | undefined;
 };
 
+// src/components/bookGrid/BookGrid.tsx
 export function BookGrid({ books, onSelect, onActionFor }: BookGridProps) {
     if (!books || books.length === 0) return <p>No books found.</p>;
 
@@ -25,7 +26,7 @@ export function BookGrid({ books, onSelect, onActionFor }: BookGridProps) {
                             type="button"
                             className="book-grid__body"
                             onClick={() => onSelect?.(b)}
-                            aria-label={`View book details: ${b.title}`}
+                            aria-label={`Ver detalle de ${b.title}`}
                         >
                             <BookCard
                                 title={b.title}
@@ -36,18 +37,22 @@ export function BookGrid({ books, onSelect, onActionFor }: BookGridProps) {
                             />
                         </button>
 
-                        {action && (
-                            <button
-                                type="button"
-                                className="book-grid__action"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    action.onClick(b);
-                                }}
-                            >
-                                {action.label}
-                            </button>
-                        )}
+                        <div className="book-grid__footer">
+                            {action ? (
+                                <button
+                                    type="button"
+                                    className="book-grid__action"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        action.onClick(b);
+                                    }}
+                                >
+                                    {action.label}
+                                </button>
+                            ) : (
+                                <span className="book-grid__spacer" aria-hidden="true" />
+                            )}
+                        </div>
                     </article>
                 );
             })}

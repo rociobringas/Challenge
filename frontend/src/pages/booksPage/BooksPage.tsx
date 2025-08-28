@@ -5,7 +5,7 @@ import * as libraryApi from "../../services/Library";
 import type { Book } from "../../types/BookType";
 import { SearchBar } from "../../components/searchBar/SearchBar";
 import { BookGrid } from "../../components/bookGrid/BookGrid";
-import {ErrorDisplay} from "../../components/errors/ErrorDisplay.tsx";
+import { Notification } from "../../components/notification/Notification";
 
 
 export default function BooksPage() {
@@ -55,20 +55,28 @@ export default function BooksPage() {
     if (loading) return <p style={{ padding: 24 }}>Loading books...</p>;
 
     return (
-        <main className="books-main">
-            <h2 className="books-title">Books</h2>
-            <SearchBar onSearch={setQ} initial={q} />
-            <BookGrid
-                books={books}
-                onSelect={(b) => navigate(`/books/${b.id}`)}
-                onActionFor={(b) =>
-                    !b.inLibrary
-                        ? { label: "Add to my library", onClick: handleAddToLibrary }
-                        : undefined
-                }
-            />
-            {books.length === 0 && <p>There are no books.</p>}
-            {notification && <ErrorDisplay message={notification} />}
-        </main>
+        <>
+            <main className="books-main">
+                <h2 className="books-title">Books</h2>
+                <SearchBar onSearch={setQ} initial={q} />
+                <BookGrid
+                    books={books}
+                    onSelect={(b) => navigate(`/books/${b.id}`)}
+                    onActionFor={(b) =>
+                        !b.inLibrary
+                            ? { label: "Add to my library", onClick: handleAddToLibrary }
+                            : undefined
+                    }
+                />
+                {books.length === 0 && <p>There are no books.</p>}
+            </main>
+
+            {notification && (
+                <Notification
+                    message={notification}
+                    type={notification.startsWith("Error") ? "error" : "success"}
+                />
+            )}
+        </>
     );
 }
