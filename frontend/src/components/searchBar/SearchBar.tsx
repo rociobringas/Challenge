@@ -2,23 +2,22 @@ import { useEffect, useState } from "react";
 import "./SearchBar.css";
 
 type SearchBarProps = {
-    onSearch: (q: string) => void;        // qué hacer cuando buscás
-    initial?: string;                     // valor inicial (opcional)
-    placeholder?: string;                 // placeholder (opcional)
-    instant?: boolean;                    // true = busca mientras tipeás (debounced)
-    delayMs?: number;                     // delay del debounce (default 300ms)
+    onSearch: (q: string) => void;
+    initial?: string;
+    placeholder?: string;
+    instant?: boolean;
+    delayMs?: number;
 };
 
 export function SearchBar({
                               onSearch,
                               initial = "",
-                              placeholder = "Buscar…",
+                              placeholder = "Search book...",
                               instant = false,
                               delayMs = 300,
                           }: SearchBarProps) {
     const [term, setTerm] = useState(initial);
 
-    // Buscar mientras tipeás (debounce)
     useEffect(() => {
         if (!instant) return;
         const t = setTimeout(() => onSearch(term.trim()), delayMs);
@@ -26,7 +25,7 @@ export function SearchBar({
     }, [instant, term, delayMs, onSearch]);
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        e.preventDefault();                     // <- clave para que no recargue la página
+        e.preventDefault();
         onSearch(term.trim());
     }
 
@@ -37,10 +36,10 @@ export function SearchBar({
                 value={term}
                 onChange={(e) => setTerm(e.target.value)}
                 placeholder={placeholder}
-                aria-label="Buscar libros"
+                aria-label="Search books"
             />
             <button className="searchbar__button" type="submit">
-                Buscar
+                Search
             </button>
         </form>
     );

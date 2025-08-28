@@ -12,13 +12,13 @@ export default function CreateBookPage() {
             await bookApi.createBook(data);
             navigate("/books");
         } catch (e) {
-            alert("Error al crear el libro");
+            alert("Error creating book")
         }
     }
 
     return (
         <main className="create-main">
-            <h2 className="create-title">Crear libro</h2>
+            <h2 className="create-title">Add new book</h2>
             <div className="create-form">
                 <BookForm onSubmit={handleSubmit} />
             </div>

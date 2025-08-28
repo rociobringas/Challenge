@@ -14,7 +14,7 @@ export function BookCard({ title, author, genre, synopsis, yearPublished }: Book
             {synopsis && <p className="book-card__synopsis">{synopsis}</p>}
 
             {yearPublished && (
-                <p className="book-card__year">Publicado: {yearPublished}</p>
+                <p className="book-card__year">Published in: {yearPublished}</p>
             )}
         </article>
     );

@@ -33,12 +33,12 @@ export default function BooksPage() {
         }
     }
 
-    useEffect(() => { load(); /* eslint-disable-next-line */ }, [q]);
+    useEffect(() => { load();  }, [q]);
 
     async function handleAddToLibrary(book: Book) {
         try {
             await libraryApi.addBookToLibrary(book.id);
-            setNotification(`Añadido a tu biblioteca: ${book.title}`);
+            setNotification(`Added to library: ${book.title}`);
         } catch (e) {
             setNotification(`Error: ${(e as Error).message}`);
         }
@@ -52,22 +52,22 @@ export default function BooksPage() {
         }
     }, [notification]);
 
-    if (loading) return <p style={{ padding: 24 }}>Cargando libros…</p>;
+    if (loading) return <p style={{ padding: 24 }}>Loading books...</p>;
 
     return (
         <main className="books-main">
-            <h2 className="books-title">Libros</h2>
+            <h2 className="books-title">Books</h2>
             <SearchBar onSearch={setQ} initial={q} />
             <BookGrid
                 books={books}
                 onSelect={(b) => navigate(`/books/${b.id}`)}
                 onActionFor={(b) =>
                     !b.inLibrary
-                        ? { label: "Agregar a mi biblioteca", onClick: handleAddToLibrary }
+                        ? { label: "Add to my library", onClick: handleAddToLibrary }
                         : undefined
                 }
             />
-            {books.length === 0 && <p>No hay resultados.</p>}
+            {books.length === 0 && <p>There are no books.</p>}
             {notification && <ErrorDisplay message={notification} />}
         </main>
     );

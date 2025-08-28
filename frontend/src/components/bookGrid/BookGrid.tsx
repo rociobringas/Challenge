@@ -22,12 +22,11 @@ export function BookGrid({ books, onSelect, onActionFor }: BookGridProps) {
                 const action = onActionFor?.(b);
                 return (
                     <article key={b.id} className="book-grid__item" role="listitem">
-                        {/* Cuerpo clickeable para ir al detalle */}
                         <button
                             type="button"
                             className="book-grid__body"
                             onClick={() => onSelect?.(b)}
-                            aria-label={`Ver detalle de ${b.title}`}
+                            aria-label={`View book details: ${b.title}`}
                         >
                             <BookCard
                                 title={b.title}
@@ -38,13 +37,12 @@ export function BookGrid({ books, onSelect, onActionFor }: BookGridProps) {
                             />
                         </button>
 
-                        {/* Acción secundaria (Agregar/Quitar) si corresponde */}
                         {action && (
                             <button
                                 type="button"
                                 className="book-grid__action"
                                 onClick={(e) => {
-                                    e.stopPropagation(); // <- evita que dispare el onSelect
+                                    e.stopPropagation();
                                     action.onClick(b);
                                 }}
                             >

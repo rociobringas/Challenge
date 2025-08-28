@@ -21,26 +21,25 @@ export default function LibraryPage() {
         setBooks(prev => prev.filter(b => b.id !== book.id));
     }
 
-    if (loading) return <div className="library-loading">Cargando tu biblioteca…</div>;
+    if (loading) return <div className="library-loading">Loading books...</div>;
 
     return (
         <main className="library-main">
             <header className="library-header">
-                <h2 className="library-title">Mi biblioteca</h2>
                 <span className="library-count">{books.length}</span>
             </header>
 
             {books.length === 0 ? (
                 <div className="library-empty">
-                    Tu biblioteca está vacía. <Link to="/books">Buscar libros</Link>
+                    There are no books <Link to="/books">Search book</Link>
                 </div>
             ) : (
                 <div className="library-grid">
                     <BookGrid
                         books={books}
-                        onSelect={(b) => navigate(`/books/${b.id}`)}  // ver detalle si querés
+                        onSelect={(b) => navigate(`/books/${b.id}`)}
                         onActionFor={() => ({
-                            label: "Quitar",
+                            label: "Delete",
                             onClick: handleRemove,
                         })}
                     />

@@ -25,13 +25,13 @@ export default function BookDetailPage() {
     }, [id]);
 
 
-    if (loading) return <div className="detail-loading">Cargando…</div>;
-    if (!book) return <div className="detail-not-found">Libro no encontrado.</div>;
+    if (loading) return <div className="detail-loading">Loading...</div>;
+    if (!book) return <div className="detail-not-found">Book not found.</div>;
 
     return (
         <main className="detail-main">
             <div className="detail-header">
-                <button onClick={() => navigate(-1)} className="detail-back">← Volver</button>
+                <button onClick={() => navigate(-1)} className="detail-back">Back</button>
             </div>
 
             <BookCard
@@ -43,7 +43,7 @@ export default function BookDetailPage() {
             />
 
             <button className="btn-ghost" onClick={() => navigate("/books")}>
-                Ver todos
+                All books
             </button>
         </main>)
 }
