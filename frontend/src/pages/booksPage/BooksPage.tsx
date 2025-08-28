@@ -15,6 +15,7 @@ export default function BooksPage() {
     const navigate = useNavigate();
     const [notification, setNotification] = useState<string | null>(null);
 
+
     async function load() {
         setLoading(true);
         try {
@@ -56,7 +57,7 @@ export default function BooksPage() {
     return (
         <main className="books-main">
             <h2 className="books-title">Libros</h2>
-            <SearchBar onSearch={setQ} />
+            <SearchBar onSearch={setQ} initial={q} />
             <BookGrid
                 books={books}
                 onSelect={(b) => navigate(`/books/${b.id}`)}

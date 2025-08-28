@@ -2,12 +2,17 @@ import {BookRepository} from "../repository/bookRepository";
 import {Book} from "@prisma/client";
 import {BadRequestError, NotFoundError} from "../../../errors";
 
+export type BookFilters = {
+    search?: string | undefined;
+    genre?: string | undefined;
+    author?: string | undefined;
+};
 
 export class BookService {
     constructor(private bookRepo = new BookRepository()) {}
 
-    async getAllBooks(): Promise<Book[]> {
-       return this.bookRepo.findAllBooks()
+    async getAllBooks(filters: BookFilters = {}): Promise<Book[]> {
+        return this.bookRepo.findAllBooks(filters);
     }
 
     async getBookById(bookId: number): Promise<Book> {

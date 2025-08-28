@@ -6,10 +6,15 @@ const bookService = new BookService();
 export class BookController {
     async getAll(req: Request, res: Response, next: NextFunction) {
         try {
-            const books = await bookService.getAllBooks(); // agarro todos los libros, si esto no falla
-            res.status(200).json(books); // pongo el estado ok y lo paso a json
+            const { search, genre, author } = req.query;
+            const books = await bookService.getAllBooks({
+                search: search as string | undefined,
+                genre: genre as string | undefined,
+                author: author as string | undefined,
+            });
+            res.status(200).json(books);
         } catch (err) {
-            next(err); // no manejo yo el error, lo delego a para que express responda con http bien
+            next(err);
         }
     }
 
@@ -22,6 +27,7 @@ export class BookController {
             next(err);
         }
     }
+
 
     async create(req: Request, res: Response, next: NextFunction) {
         try {
@@ -42,3 +48,4 @@ export class BookController {
         }
     }
 }
+

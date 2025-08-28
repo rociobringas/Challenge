@@ -4,14 +4,15 @@ import type {BookCardProps} from "../types/BookCardType.ts";
 
 const API_URL = import.meta.env.VITE_API_URL as string;
 
-function buildQuery(params?: Record<string, string | number | boolean | undefined>) {
-    const q = new URLSearchParams();
-    if (!params) return "";
-    Object.entries(params).forEach(([k, v]) => {
-        if (v !== undefined && v !== null && v !== "") q.append(k, String(v));
-    });
-    const s = q.toString();
-    return s ? `?${s}` : "";
+
+function buildQuery(opts?: { search?: string; genre?: string; author?: string }) {
+    if (!opts) return "";
+    const p = new URLSearchParams();
+    if (opts.search) p.set("search", opts.search);
+    if (opts.genre)  p.set("genre", opts.genre);
+    if (opts.author) p.set("author", opts.author);
+    const qs = p.toString();
+    return qs ? `?${qs}` : "";
 }
 
 async function apiFetch<T>(input: RequestInfo, init?: RequestInit): Promise<T> {
