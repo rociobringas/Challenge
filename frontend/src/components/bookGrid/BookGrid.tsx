@@ -1,34 +1,57 @@
+// src/components/bookGrid/BookGrid.tsx
 import type { Book } from "../../types/BookType";
+import { BookCard } from "../bookCard/BookCard";
 import "./BookGrid.css";
-type BookWithFlag = Book & { inLibrary?: boolean };
 
+type BookWithFlag = Book & { inLibrary?: boolean };
 
 type BookGridProps = {
     books: BookWithFlag[];
-    onSelect?: (book: BookWithFlag) => void;
-    onActionFor?: (book: BookWithFlag) =>
-        { label: string; onClick: (book: BookWithFlag) => void } | undefined;
+    onSelect?: (book: BookWithFlag) => void | Promise<void>;
+    onActionFor?: (
+        book: BookWithFlag
+    ) => { label: string; onClick: (book: BookWithFlag) => void | Promise<void> } | undefined;
 };
 
 export function BookGrid({ books, onSelect, onActionFor }: BookGridProps) {
     if (!books || books.length === 0) return <p>No books found.</p>;
 
     return (
-        <section className="book-grid">
+        <section className="book-grid" role="list" aria-label="Libros">
             {books.map((b) => {
                 const action = onActionFor?.(b);
                 return (
-                    <div key={b.id} className="book-card">
-                        <div onClick={() => onSelect?.(b)}>
-                            <h3>{b.title}</h3>
-                            <p>{b.author}</p>
-                        </div>
+                    <article key={b.id} className="book-grid__item" role="listitem">
+                        {/* Cuerpo clickeable para ir al detalle */}
+                        <button
+                            type="button"
+                            className="book-grid__body"
+                            onClick={() => onSelect?.(b)}
+                            aria-label={`Ver detalle de ${b.title}`}
+                        >
+                            <BookCard
+                                title={b.title}
+                                author={b.author}
+                                genre={b.genre}
+                                synopsis={b.synopsis}
+                                yearPublished={b.yearPublished}
+                            />
+                        </button>
+
+                        {/* Acción secundaria (Agregar/Quitar) si corresponde */}
                         {action && (
-                            <button onClick={() => action.onClick(b)}>
+                            <button
+                                type="button"
+                                className="book-grid__action"
+                                onClick={(e) => {
+                                    e.stopPropagation(); // <- evita que dispare el onSelect
+                                    action.onClick(b);
+                                }}
+                            >
                                 {action.label}
                             </button>
                         )}
-                    </div>
+                    </article>
                 );
             })}
         </section>
