@@ -12,6 +12,9 @@ export function NavBar() {
                 <li>
                     <Link to="/library">Library</Link>
                 </li>
+                <li>
+                    <Link to="/">Home</Link>
+                </li>
             </ul>
         </nav>
     );
